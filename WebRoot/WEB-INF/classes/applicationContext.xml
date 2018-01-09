@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- 将hibernate中的内容配置到Spring中 -->
+	<!-- 配置数据库的连接 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+		<property name="jdbcUrl" value="jdbc:mysql:///college-project-test?useUnicode=true&amp;characterEncoding=UTF-8"></property>
+		<property name="user" value="root"></property>
+		<property name="password" value="zhang79113mysql"></property>
+	</bean>
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- <property name="configLocation" value="classpath:hibernate.cfg.xml"></property> -->
+		<property name="dataSource" ref="dataSource"/>
+		<!-- 加载除连接数据库的其它选项，使用的是属性文件 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 配置映射，传入的是字符串数组，所以可以配置多个 -->
+		<property name="mappingResources">
+			<list>
+				<value>com/jxust/dianqi/bean/Student.hbm.xml</value>
+				<value>com/jxust/dianqi/bean/ProClass.hbm.xml</value>
+				<value>com/jxust/dianqi/bean/Hobby.hbm.xml</value>
+				<value>com/jxust/dianqi/bean/StudentInfo.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 配置事务 -->
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 开启事务注解 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- 在spring中配置action -->
+	<bean id="studentAction" class="com.jxust.dianqi.web.action.StudentAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	<bean id="indexAction" class="com.jxust.dianqi.web.action.IndexAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	<bean id="proClassAction" class="com.jxust.dianqi.web.action.ProClassAction" scope="prototype">
+		<property name="proClassService" ref="proClassService"></property>
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	<bean id="studentInfoAction" class="com.jxust.dianqi.web.action.StudentInfoAction" scope="prototype">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+	
+	<!-- 创建Service层对象 -->
+	<bean id="studentService" class="com.jxust.dianqi.service.impl.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<bean id="proClassService" class="com.jxust.dianqi.service.impl.ProClassServiceImpl">
+		<property name="proClassDao" ref="proClassDao"></property>
+	</bean>
+	
+	<!-- 创建DAO层对象 -->
+	<bean id="studentDao" class="com.jxust.dianqi.dao.impl.StudentDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	<bean id="proClassDao" class="com.jxust.dianqi.dao.impl.ProClassDaoImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate"></property>
+	</bean>
+	
+	<!-- 创建Hibernate模板对象 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+</beans>

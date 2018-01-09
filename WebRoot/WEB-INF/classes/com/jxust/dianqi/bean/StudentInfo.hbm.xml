@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jxust.dianqi.bean.StudentInfo" table="student_info">
+        <id name="siid" column="siid">
+            <generator class="uuid"/>
+        </id>
+        <property name="evaluationTime" column="evaluationTime"/>
+        <property name="professionScore"/>
+        <property name="pSRank"/>
+        
+        <!-- 分表三 -->
+        <property name="table3_1"/>
+        <property name="table3_1_1"/>
+        <property name="table3_2"/>
+        <property name="table3_2_1"/>
+        <property name="table3_3"/>
+        <property name="table3_3_1"/>
+        <property name="table3_4"/>
+        <property name="table3_4_1"/>
+        <property name="table3_5"/>
+        <property name="table3_5_1"/>
+        <property name="table3_6"/>
+        <property name="table3_6_1"/>
+        <property name="table3_7"/>
+        <property name="table3_7_1"/>
+        <property name="table3_8"/>
+        <property name="table3_8_1"/>
+        <property name="table3_9"/>
+        <property name="table3_9_1"/>
+        
+        <!-- 分表四 -->
+        <property name="table14_1"/>
+        <property name="table14_1_1"/>
+        <property name="table14_2"/>
+        <property name="table14_2_1"/>
+        <property name="table14_3"/>
+        <property name="table14_3_1"/>
+        <property name="table14_4"/>
+        <property name="table14_4_1"/>
+        <property name="table14_5"/>
+        <property name="table14_5_1"/>
+        <property name="table14_6"/>
+        <property name="table14_6_1"/>
+        <property name="table04_1"/>	<!-- 减分 -->
+        <property name="table04_1_1"/>
+        <property name="table04_2"/>
+        <property name="table04_2_1"/>
+        
+        <!-- 分表五 -->
+        <property name="table15_1"/>
+        <property name="table15_1_1"/>
+        <property name="table15_2"/>
+        <property name="table15_2_1"/>
+        <property name="table15_3"/>
+        <property name="table15_3_1"/>
+        <property name="table15_4"/>
+        <property name="table15_4_1"/>
+        <property name="table15_5"/>
+        <property name="table15_5_1"/>
+        <property name="table15_6"/>
+        <property name="table15_6_1"/>
+        <property name="table15_7"/>
+        <property name="table15_7_1"/>
+        <property name="table05_1"/>	<!-- 减分 -->
+        <property name="table05_1_1"/>
+        <property name="table05_2"/>
+        <property name="table05_2_1"/>
+        <property name="table05_3"/>
+        <property name="table05_3_1"/>
+        <property name="table05_4"/>
+        <property name="table05_4_1"/>
+        <property name="table05_5"/>
+        <property name="table05_5_1"/>
+        <property name="table05_6"/>
+        <property name="table05_6_1"/>
+        <property name="table05_7"/>
+        <property name="table05_7_1"/>
+        <property name="table05_8"/>
+        <property name="table05_8_1"/>
+        <property name="table05_9"/>
+        <property name="table05_9_1"/>
+        <property name="table05_10"/>
+        <property name="table05_10_1"/>
+        
+        <!-- 分表六 -->
+        <property name="table16_1"/>
+        <property name="table16_1_1"/>
+        <property name="table16_2"/>
+        <property name="table16_2_1"/>
+        <property name="table16_3"/>
+        <property name="table16_3_1"/>
+        <property name="table16_4"/>
+        <property name="table16_4_1"/>
+        <property name="table16_5"/>
+        <property name="table16_5_1"/>
+        <property name="table16_6"/>
+        <property name="table16_6_1"/>
+        <property name="table16_7"/>
+        <property name="table16_7_1"/>
+        <property name="table06_1"/>	<!-- 减分 -->
+        <property name="table06_1_1"/>
+        <property name="table06_2"/>
+        <property name="table06_2_1"/>
+        <property name="table06_3"/>
+        <property name="table06_3_1"/>
+        <property name="table06_4"/>
+        <property name="table06_4_1"/>
+        <property name="table06_5"/>
+        <property name="table06_5_1"/>
+        
+        <one-to-one class="com.jxust.dianqi.bean.Student" name="student" cascade="save-update,delete"></one-to-one>
+    </class>
+</hibernate-mapping>

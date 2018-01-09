@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="dome1" extends="struts-default" namespace="/">
+		
+		<!-- 每次跳转到主页面时不仅仅是简单的页面显示，需要进行数据库的查询，所以需要经过indexAction（重定向到action中） -->
+		<global-results>
+			<result name="index" type="redirectAction">index_index</result>
+		</global-results>
+	
+		<action name="index_*" class="indexAction" method="{1}">
+			<result name="index">/jsp/index.jsp</result>
+		</action>
+		
+		<action name="student_*" class="studentAction" method="{1}">
+			<result name="info">/jsp/info.jsp</result>
+			<result name="user-info">/jsp/user-info.jsp</result>
+			<result name="info-add">/jsp/info_add.jsp</result>
+			<result name="forget-pwd">/jsp/forget_pwd.jsp</result>
+		</action>
+		
+		<action name="proClass_*" class="proClassAction" method="{1}">
+			<result name="student-info">/jsp/student.jsp</result>
+		</action>
+		
+		<action name="studentInfo_*" class="studentInfoAction" method="{1}">
+			<result name="add-success">/jsp/info.jsp</result>
+		</action>
+	</package>
+</struts>

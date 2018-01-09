@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jxust.dianqi.bean.Student" table="student">
+        <id name="sid" column="sid">
+            <generator class="uuid"/>
+        </id>
+        <property name="account" column="account"/>
+        <property name="password" column="password"/>
+        <property name="name" column="name"/>
+        <property name="sex" column="sex"/>
+        <property name="birthday" column="birthday"/>
+        <property name="tele" column="tele"/>
+        <!-- <property name="interesting" column="interesting"/> 将其升级为多对多的关系，见下 -->
+        <property name="stuID" column="stuID"/>
+        <property name="identity" column="identity"/>
+        <property name="avatar" column="avatar"/>
+        <property name="position" column="position"/>
+        <property name="score70p" column="score70p"/>
+        <property name="score30p" column="score30p"/>
+        <property name="rank" column="rank"/>
+        <property name="status" column="status"/>
+        <property name="lift" column="lift"/>
+        <property name="signature" column="signature"/>
+        <property name="scoreTotal" column="scoretotal"/>
+        <!-- <many-to-one name="proClass" fetch="join" lazy="false" class="com.jxust.dianqi.bean.ProClass" column="pcid"/> -->
+        <many-to-one name="proClass" class="com.jxust.dianqi.bean.ProClass" column="pcid" fetch="join" lazy="false"/>
+        <set name="hobbys" table="student_hobby">
+        	<key column="sh_sid"></key>
+        	<many-to-many class="com.jxust.dianqi.bean.Hobby" column="sh_hid"></many-to-many>
+        </set>
+        <!-- 和学生信息的一对一关系，unique为外键添加唯一约束 -->
+        <many-to-one class="com.jxust.dianqi.bean.StudentInfo" name="studentInfo" unique="true" column="studentInfo"></many-to-one>
+    </class>
+</hibernate-mapping>

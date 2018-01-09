@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Configuration status="warn">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLanyout pattern="%m%n"/>
+		</Console>
+	</Appenders>
+	<Loggers>
+		
+	</Loggers>
+	<Root level="INFO">
+		<AppenderRef ref="Console"/>
+	</Root>
+</Configuration>

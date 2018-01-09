@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.jxust.dianqi.bean.Hobby" table="hobby">
+        <id name="hid" column="hid">
+            <generator class="native"/>
+        </id>
+        <property name="hobbyItem" column="hobbyItem"/>
+        <set name="students" table="student_hobby">
+            <key column="sh_hid"/>
+            <many-to-many class="com.jxust.dianqi.bean.Hobby" column="sh_sid"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
